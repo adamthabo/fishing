@@ -1,17 +1,17 @@
 import cheerio from 'cheerio';
 
 export default async function handler(req, res) {
-  // An array to store the report objects we extract
+  // Array to store the report objects
   const reports = [];
   
-  // List of sources: each with a label and the URL to scrape.
+  // List of sources with labels and URLs to scrape
   const sources = [
     { source: "Delaware River Club", url: "https://thedelawareriverclub.com/blog/" },
     { source: "West Branch Resort", url: "https://www.westbranchresort.com/delaware-fishing-report" },
     { source: "Delaware River Fishing", url: "http://www.delawareriverfishing.com" }
   ];
 
-  // Loop over each source to fetch and scrape its latest report
+  // Loop over each source
   for (let site of sources) {
     try {
       const response = await fetch(site.url);
@@ -23,9 +23,10 @@ export default async function handler(req, res) {
       const $ = cheerio.load(html);
       let report = {};
       
-      // --- Delaware River Club Scraping Logic ---
+      // Scraping logic for each source
+      
+      // Delaware River Club
       if (site.source === "Delaware River Club") {
-        // Look for the first <article> element (commonly used in blogs)
         const article = $('article').first();
         if (article.length) {
           const title = article.find('h2.entry-title a').text().trim();
@@ -35,9 +36,8 @@ export default async function handler(req, res) {
           report = { source: site.source, title, date, summary, link };
         }
       }
-      // --- West Branch Resort Scraping Logic ---
+      // West Branch Resort
       else if (site.source === "West Branch Resort") {
-        // Assume latest report is within an element with class 'post'
         const article = $('.post').first();
         if (article.length) {
           const title = article.find('.post-title a').text().trim();
@@ -47,9 +47,8 @@ export default async function handler(req, res) {
           report = { source: site.source, title, date, summary, link };
         }
       }
-      // --- Delaware River Fishing Scraping Logic ---
+      // Delaware River Fishing
       else if (site.source === "Delaware River Fishing") {
-        // Try to use an <article> element to get the latest report
         const article = $('article').first();
         if (article.length) {
           const title = article.find('h2').first().text().trim();
@@ -60,7 +59,7 @@ export default async function handler(req, res) {
         }
       }
       
-      // If a valid report with a title was found, add it to our reports array.
+      // Add the report if it has a title
       if (report && report.title) {
         reports.push(report);
       }
