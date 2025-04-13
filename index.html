@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Upper Delaware Fishing</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <main>
+    <h1>🎣 Upper Delaware Fishing Alert</h1>
+
+    <label for="locationSelect">Select Location:</label>
+    <select id="locationSelect">
+      <option value="01427207">Lordville, NY</option>
+      <option value="01427510">Callicoon, NY</option>
+      <option value="01426500">Hale Eddy (West Branch)</option>
+      <option value="01421000">Cooks Falls (Beaver Kill)</option>
+      <option value="01420500">Livingston Manor (Willowemoc)</option>
+      <option value="01434498">Claryville (Neversink)</option>
+    </select>
+
+    <div id="conditions">
+      <div id="river-conditions">
+        <h2>River Conditions</h2>
+        <p id="flow">Flow: --</p>
+        <p id="temp">Temperature: --</p>
+        <p id="level">Level: --</p>
+      </div>
+
+      <div id="weather-conditions">
+        <h2>Weather</h2>
+        <p id="weather">--</p>
+      </div>
+
+      <div id="fly-patterns">
+        <h2>Fly Patterns</h2>
+        <ul id="flies"><li>--</li></ul>
+      </div>
+    </div>
+
+    <div id="alerts"></div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
