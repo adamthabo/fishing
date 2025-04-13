@@ -128,7 +128,7 @@ function updateAll() {
   fetchFishingReports();
 }
 
-// When the drop-down selection changes, update immediately (for USGS/NOAA)
+// When the drop-down selection changes, update immediately (no need to click UPDATE ALL)
 document.getElementById("locationSelect").addEventListener("change", () => {
   updateAll();
 });
