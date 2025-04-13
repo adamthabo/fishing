@@ -7,14 +7,6 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <!-- Full-Screen Background Image Carousel -->
-  <div id="background-carousel">
-    <img src="https://tse4.mm.bing.net/th?id=OIP.BWETm9wWhdJln_MQQzhIiQHaFc&pid=Api" class="carousel-img" alt="Background 1">
-    <img src="https://tse2.mm.bing.net/th/id/OIP.1O0dELbWjynMO4aQ5J4-vAHaFj?pid=Api" class="carousel-img" alt="Background 2">
-    <img src="https://tse4.mm.bing.net/th?id=OIP.EZAOC8ANZJf_z17VlexoiQHaFj&pid=Api" class="carousel-img" alt="Background 3">
-    <img src="https://tse2.mm.bing.net/th?id=OIP.THStyKXzWn2thACVT6gDPwHaEK&pid=Api" class="carousel-img" alt="Background 4">
-  </div>
-  
   <main>
     <h1>🎣 Upper Delaware Fishing Alert</h1>
     <label for="locationSelect">Select Location:</label>
@@ -33,6 +25,7 @@
       <option value="01428500">Barryville, NY</option>
       <option value="01438500">Montague, NJ</option>
     </select>
+    <button id="updateAllBtn">UPDATE ALL</button>
 
     <div id="conditions">
       <div id="river-conditions">
@@ -56,8 +49,14 @@
     </div>
 
     <div id="alerts"></div>
-  </main>
 
+    <section id="reports-section">
+      <h2>Recent Fishing Reports</h2>
+      <ul id="fishing-reports">
+        <li>Loading fishing reports...</li>
+      </ul>
+    </section>
+  </main>
   <script src="app.js"></script>
 </body>
 </html>
