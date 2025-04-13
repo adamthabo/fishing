@@ -102,7 +102,7 @@ function suggestFlyPatterns(temp) {
   });
 }
 
-// Fetch fishing reports from a server-side endpoint that scrapes real local sources
+// Fetch fishing reports from the server-side endpoint
 async function fetchFishingReports() {
   try {
     const res = await fetch("/api/reports");
@@ -112,7 +112,7 @@ async function fetchFishingReports() {
     reportsList.innerHTML = "";
     data.forEach(report => {
       const li = document.createElement("li");
-      li.innerHTML = `<strong>${report.source}</strong>: <a href="${report.link}" target="_blank">${report.title}</a> (${report.date})`;
+      li.innerHTML = `<strong>${report.source}</strong>: <a href="${report.link}" target="_blank">${report.title}</a> (${report.date})<br><em>${report.summary}</em>`;
       reportsList.appendChild(li);
     });
   } catch (error) {
