@@ -1,71 +1,26 @@
-/* Remove black background so the carousel images are fully visible */
 body {
+  background-color: #1a1a1a;
   margin: 0;
   padding: 1rem;
   font-family: Arial, sans-serif;
-  text-align: center;
   color: #d3d3d3;
+  text-align: center;
 }
 
-/* Full-Screen Background Image Carousel */
-#background-carousel {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: -1;
-}
-
-.carousel-img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  animation: fade 20s infinite;
-}
-
-.carousel-img:nth-child(1) {
-  animation-delay: 0s;
-}
-.carousel-img:nth-child(2) {
-  animation-delay: 5s;
-}
-.carousel-img:nth-child(3) {
-  animation-delay: 10s;
-}
-.carousel-img:nth-child(4) {
-  animation-delay: 15s;
-}
-
-@keyframes fade {
-  0% { opacity: 0; }
-  10% { opacity: 1; }
-  30% { opacity: 1; }
-  40% { opacity: 0; }
-  100% { opacity: 0; }
-}
-
-/* Main Content */
 main {
   max-width: 800px;
   margin: auto;
-  position: relative;
-  z-index: 1;
 }
 
-/* Headings */
 h1, h2 {
   color: #ffa500;
 }
 
-/* Conditions container with a semi-transparent background for readability */
+/* Conditions container */
 #conditions {
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
+  justify-content: space-between;
   background: rgba(0, 0, 0, 0.6);
   padding: 1rem;
   border-radius: 10px;
@@ -82,10 +37,15 @@ h1, h2 {
   background-color: rgba(34, 34, 34, 0.8);
 }
 
-select {
+select, button {
   padding: 0.5rem;
   font-size: 1rem;
   margin-bottom: 1rem;
+}
+
+button {
+  margin-left: 1rem;
+  cursor: pointer;
 }
 
 #alerts {
@@ -93,4 +53,30 @@ select {
   font-weight: bold;
   font-size: 1.2rem;
   color: #ffa500;
+}
+
+/* Fishing Reports Section */
+#reports-section {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 10px;
+}
+
+#reports-section ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+#reports-section li {
+  margin: 0.5rem 0;
+}
+
+#reports-section a {
+  color: #ffa500;
+  text-decoration: none;
+}
+
+#reports-section a:hover {
+  text-decoration: underline;
 }
