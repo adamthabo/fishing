@@ -1,13 +1,12 @@
 # Upper Delaware Fishing Alert
 
-A real-time fishing resource that integrates live USGS water data and NOAA weather forecasts for key fly-fishing locations in the Upper Delaware River system.
+A live resource that integrates USGS river data with NOAA weather forecasts for key fly-fishing locations in the Upper Delaware River system.
 
 ## Features
-- **Live River Data:** Fetches real-time water data (flow, level, water temperature) from USGS.
-- **Live Weather Forecast:** Retrieves current hourly forecasts using the NOAA API (via zone endpoints).
-- **Dynamic Fly Pattern Suggestions:** Suggests appropriate fly patterns based on water temperature.
-- **Background Carousel:** Full-screen image carousel (four provided images) fading in and out.
-- **Dropdown Location Selector:** Switch between multiple real-world USGS-monitored locations.
+- **Live River Data:** Real-time water data (flow, gauge height, water temperature) from USGS.
+- **Live Weather Forecast:** NOAA forecast fetched via coordinates derived from USGS data.
+- **Dynamic Fly Pattern Suggestions:** Recommended fly patterns based on water temperature.
+- **Full-Screen Image Carousel:** Background rotates between four provided images.
+- **Dropdown Location Selector:** Choose from multiple USGS-monitored locations.
 
 ## File Structure
-
