@@ -1,26 +1,29 @@
 body {
-  background-color: #1a1a1a;
+  background-color: #000;
+  color: #d3d3d3;
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 1rem;
-  font-family: Arial, sans-serif;
-  color: #d3d3d3;
   text-align: center;
+}
+
+/* Headings */
+h1, h2 {
+  color: #ffa500;
 }
 
 main {
   max-width: 800px;
   margin: auto;
+  position: relative;
+  z-index: 1;
 }
 
-h1, h2 {
-  color: #ffa500;
-}
-
-/* Conditions container */
+/* Conditions container with semi-transparent background for readability */
 #conditions {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
+  flex-wrap: wrap;
   background: rgba(0, 0, 0, 0.6);
   padding: 1rem;
   border-radius: 10px;
@@ -37,15 +40,26 @@ h1, h2 {
   background-color: rgba(34, 34, 34, 0.8);
 }
 
-select, button {
+select {
   padding: 0.5rem;
   font-size: 1rem;
   margin-bottom: 1rem;
 }
 
-button {
-  margin-left: 1rem;
+/* UPDATE ALL button styling */
+button#update-all {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #ffa500;
+  border: none;
+  border-radius: 5px;
+  color: #000;
   cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+button#update-all:hover {
+  background-color: #ffcc66;
 }
 
 #alerts {
@@ -55,28 +69,25 @@ button {
   color: #ffa500;
 }
 
-/* Fishing Reports Section */
-#reports-section {
+/* Fishing Reports section */
+#fishing-reports {
   background: rgba(0, 0, 0, 0.6);
   padding: 1rem;
-  margin-top: 1rem;
   border-radius: 10px;
+  margin-top: 1rem;
+  text-align: left;
 }
 
-#reports-section ul {
+#fishing-reports h2 {
+  text-align: center;
+}
+
+#reports-list {
   list-style: none;
-  padding-left: 0;
+  padding: 0;
 }
 
-#reports-section li {
-  margin: 0.5rem 0;
-}
-
-#reports-section a {
-  color: #ffa500;
-  text-decoration: none;
-}
-
-#reports-section a:hover {
-  text-decoration: underline;
+#reports-list li {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
 }
