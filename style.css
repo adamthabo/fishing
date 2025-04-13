@@ -1,33 +1,21 @@
+/* Remove black background so the carousel images are fully visible */
 body {
-  background-color: #000;
-  color: #d3d3d3;
-  font-family: Arial, sans-serif;
   margin: 0;
   padding: 1rem;
+  font-family: Arial, sans-serif;
   text-align: center;
+  color: #d3d3d3;
 }
 
-/* Header colors */
-h1, h2 {
-  color: #ffa500;
-}
-
-main {
-  max-width: 800px;
-  margin: auto;
-  position: relative;
-  z-index: 1;
-}
-
-/* Background Carousel */
+/* Full-Screen Background Image Carousel */
 #background-carousel {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
   overflow: hidden;
+  z-index: -1;
 }
 
 .carousel-img {
@@ -60,7 +48,20 @@ main {
   100% { opacity: 0; }
 }
 
-/* Conditions container */
+/* Main Content */
+main {
+  max-width: 800px;
+  margin: auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Headings */
+h1, h2 {
+  color: #ffa500;
+}
+
+/* Conditions container with a semi-transparent background for readability */
 #conditions {
   display: flex;
   justify-content: space-between;
@@ -78,7 +79,7 @@ main {
   padding: 1rem;
   border: 1px solid #444;
   border-radius: 10px;
-  background-color: #222;
+  background-color: rgba(34, 34, 34, 0.8);
 }
 
 select {
@@ -92,9 +93,4 @@ select {
   font-weight: bold;
   font-size: 1.2rem;
   color: #ffa500;
-}
-
-#weather-icon {
-  display: block;
-  margin: 0 auto 0.5rem auto;
 }
