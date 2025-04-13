@@ -9,6 +9,7 @@
 <body>
   <main>
     <h1>🎣 Upper Delaware Fishing Alert</h1>
+    
     <label for="locationSelect">Select Location:</label>
     <select id="locationSelect">
       <option value="01425000">Stilesville, NY</option>
@@ -25,8 +26,9 @@
       <option value="01428500">Barryville, NY</option>
       <option value="01438500">Montague, NJ</option>
     </select>
-    <button id="updateAllBtn">UPDATE ALL</button>
-
+    
+    <button id="update-all">UPDATE ALL</button>
+    
     <div id="conditions">
       <div id="river-conditions">
         <h2>River Conditions</h2>
@@ -49,14 +51,16 @@
     </div>
 
     <div id="alerts"></div>
-
-    <section id="reports-section">
+    
+    <!-- Recent Fishing Reports Section -->
+    <div id="fishing-reports">
       <h2>Recent Fishing Reports</h2>
-      <ul id="fishing-reports">
+      <ul id="reports-list">
         <li>Loading fishing reports...</li>
       </ul>
-    </section>
+    </div>
   </main>
+
   <script src="app.js"></script>
 </body>
 </html>
