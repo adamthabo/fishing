@@ -1,21 +1,21 @@
-// Mapping of USGS site codes to location name and NOAA forecast zone
+// Mapping of USGS site codes to location names (for reference)
 const locationMapping = {
-  "01425000": { name: "Stilesville, NY", noaa: "NYZ057" },
-  "01426500": { name: "Hale Eddy, NY", noaa: "NYZ057" },
-  "01427000": { name: "Hancock, NY", noaa: "NYZ057" },
-  "01417000": { name: "Downsville, NY", noaa: "NYZ057" },
-  "01417500": { name: "Harvard, NY", noaa: "NYZ057" },
-  "01421000": { name: "Fishs Eddy, NY", noaa: "NYZ057" },
-  "01420500": { name: "Cooks Falls, NY", noaa: "NYZ057" },
-  "01419500": { name: "Livingston Manor, NY", noaa: "NYZ062" },
-  "01436690": { name: "Bridgeville, NY", noaa: "NYZ062" },
-  "01427207": { name: "Lordville, NY", noaa: "PAZ040" },
-  "01427510": { name: "Callicoon, NY", noaa: "PAZ072" },
-  "01428500": { name: "Barryville, NY", noaa: "NYZ062" },
-  "01438500": { name: "Montague, NJ", noaa: "PAZ048" }
+  "01425000": "Stilesville, NY",
+  "01426500": "Hale Eddy, NY",
+  "01427000": "Hancock, NY",
+  "01417000": "Downsville, NY",
+  "01417500": "Harvard, NY",
+  "01421000": "Fishs Eddy, NY",
+  "01420500": "Cooks Falls, NY",
+  "01419500": "Livingston Manor, NY",
+  "01436690": "Bridgeville, NY",
+  "01427207": "Lordville, NY",
+  "01427510": "Callicoon, NY",
+  "01428500": "Barryville, NY",
+  "01438500": "Montague, NJ"
 };
 
-// Fetch real-time river data from USGS for the selected site
+// Fetch real-time river data from USGS
 async function fetchRiverData(siteCode) {
   const usgsUrl = `https://waterservices.usgs.gov/nwis/iv/?sites=${siteCode}&format=json&parameterCd=00060,00065,00010`;
   try {
@@ -36,40 +36,43 @@ async function fetchRiverData(siteCode) {
     document.getElementById("level").textContent = "Level: " + level;
     document.getElementById("temp").textContent = "Temperature: " + temp;
 
+    // Get geographic coordinates from USGS data for weather lookup
+    if (series.length > 0 && series[0].sourceInfo && series[0].sourceInfo.geoLocation) {
+      const lat = series[0].sourceInfo.geoLocation.geogLocation.latitude;
+      const lon = series[0].sourceInfo.geoLocation.geogLocation.longitude;
+      fetchWeatherCoordinates(lat, lon);
+    } else {
+      document.getElementById("weather").textContent = "Coordinates unavailable for weather";
+    }
+
     checkFishingConditions(flow, temp);
   } catch (error) {
     console.error("Error fetching river data:", error);
   }
 }
 
-// Fetch weather forecast from NOAA using the zone endpoint based on the location mapping
-async function fetchWeather(siteCode) {
-  const locationData = locationMapping[siteCode];
-  if (!locationData) return;
-  
-  const noaaZone = locationData.noaa;
-  const weatherUrl = `https://api.weather.gov/zones/forecast/${noaaZone}`;
+// Fetch weather forecast from NOAA using lat/lon coordinates
+async function fetchWeatherCoordinates(lat, lon) {
+  const pointsUrl = `https://api.weather.gov/points/${lat},${lon}`;
   try {
-    const res = await fetch(weatherUrl);
-    const data = await res.json();
-    // NOAA Zone Forecast returns a properties.periods array
-    const period = data.properties.periods[0];
+    const resPoints = await fetch(pointsUrl);
+    const pointsData = await resPoints.json();
+    const forecastUrl = pointsData.properties.forecast;
+    const resForecast = await fetch(forecastUrl);
+    const forecastData = await resForecast.json();
+    const period = forecastData.properties.periods[0];
     if (period) {
       document.getElementById("weather").textContent = `${period.shortForecast}, ${period.temperature}°${period.temperatureUnit}`;
-      // Use the provided icon URL from the forecast if available
-      if (period.icon) {
-        document.getElementById("weather-icon").src = period.icon;
-      }
     } else {
       document.getElementById("weather").textContent = "No forecast available";
     }
   } catch (error) {
-    console.error("Error fetching weather data:", error);
+    console.error("Error fetching weather:", error);
     document.getElementById("weather").textContent = "Error fetching weather";
   }
 }
 
-// Check if river conditions and temperature are ideal for fishing
+// Determine if river conditions are ideal for fishing
 function checkFishingConditions(flowStr, tempStr) {
   const flow = parseFloat(flowStr);
   const temp = parseFloat(tempStr);
@@ -98,13 +101,12 @@ function suggestFlyPatterns(temp) {
   });
 }
 
-// Update both river data and weather forecast based on the selected site
+// Update both river and weather data for the selected location
 function updateData(siteCode) {
   fetchRiverData(siteCode);
-  fetchWeather(siteCode);
 }
 
-// When the dropdown selection changes
+// When dropdown selection changes, update data
 document.getElementById("locationSelect").addEventListener("change", (e) => {
   updateData(e.target.value);
 });
