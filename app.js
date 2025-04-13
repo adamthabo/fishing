@@ -102,7 +102,7 @@ function suggestFlyPatterns(temp) {
   });
 }
 
-// Fetch fishing reports from the server-side endpoint (using RSS feeds)
+// Fetch fishing reports from the server-side endpoint
 async function fetchFishingReports() {
   try {
     const res = await fetch("/api/reports");
