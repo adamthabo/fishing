@@ -1,7 +1,7 @@
 {
-  "name": "upper-delaware-fishing",
+  "name": "fishing",
   "version": "1.0.0",
-  "description": "A live fishing report site for the Upper Delaware River system, using real USGS and NOAA data and dynamically scraped fishing reports.",
+  "description": "A live fishing report site for the Upper Delaware River system using real USGS and NOAA data plus dynamic RSS feeds for fishing reports.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
