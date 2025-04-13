@@ -36,7 +36,7 @@ async function fetchRiverData(siteCode) {
     document.getElementById("level").textContent = "Level: " + level;
     document.getElementById("temp").textContent = "Temperature: " + temp;
 
-    // Get geographic coordinates from USGS data for weather lookup
+    // Use coordinates from USGS data to fetch weather forecast via NOAA
     if (series.length > 0 && series[0].sourceInfo && series[0].sourceInfo.geoLocation) {
       const lat = series[0].sourceInfo.geoLocation.geogLocation.latitude;
       const lon = series[0].sourceInfo.geoLocation.geogLocation.longitude;
@@ -51,7 +51,7 @@ async function fetchRiverData(siteCode) {
   }
 }
 
-// Fetch weather forecast from NOAA using lat/lon coordinates
+// Fetch weather forecast from NOAA using latitude and longitude
 async function fetchWeatherCoordinates(lat, lon) {
   const pointsUrl = `https://api.weather.gov/points/${lat},${lon}`;
   try {
@@ -77,7 +77,7 @@ function checkFishingConditions(flowStr, tempStr) {
   const flow = parseFloat(flowStr);
   const temp = parseFloat(tempStr);
   const alertEl = document.getElementById("alerts");
-  // The ideal thresholds (flow: 500-2000 cfs, temperature: 8°C-18°C) determine the alert message.
+  // Ideal thresholds: flow between 500-2000 cfs and water temperature between 8°C-18°C
   if (!isNaN(flow) && !isNaN(temp) && flow >= 500 && flow <= 2000 && temp >= 8 && temp <= 18) {
     alertEl.textContent = "🔥 Conditions are PERFECT for fishing!";
   } else {
@@ -102,7 +102,7 @@ function suggestFlyPatterns(temp) {
   });
 }
 
-// Fetch fishing reports from the server-side endpoint
+// Fetch fishing reports from the server-side endpoint (using RSS feeds)
 async function fetchFishingReports() {
   try {
     const res = await fetch("/api/reports");
@@ -162,7 +162,7 @@ document.getElementById("locationSelect").addEventListener("change", () => {
   updateAll();
 });
 
-// Initial load
+// Initial load of all data
 updateAll();
 startRegularUpdate();
 scheduleDailyUpdate();
