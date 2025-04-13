@@ -7,6 +7,7 @@ body {
   text-align: center;
 }
 
+/* Header colors */
 h1, h2 {
   color: #ffa500;
 }
@@ -14,12 +15,60 @@ h1, h2 {
 main {
   max-width: 800px;
   margin: auto;
+  position: relative;
+  z-index: 1;
 }
 
+/* Background Carousel */
+#background-carousel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.carousel-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  animation: fade 20s infinite;
+}
+
+.carousel-img:nth-child(1) {
+  animation-delay: 0s;
+}
+.carousel-img:nth-child(2) {
+  animation-delay: 5s;
+}
+.carousel-img:nth-child(3) {
+  animation-delay: 10s;
+}
+.carousel-img:nth-child(4) {
+  animation-delay: 15s;
+}
+
+@keyframes fade {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  30% { opacity: 1; }
+  40% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* Conditions container */
 #conditions {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 1rem;
+  border-radius: 10px;
+  margin-top: 1rem;
 }
 
 #conditions > div {
@@ -43,4 +92,9 @@ select {
   font-weight: bold;
   font-size: 1.2rem;
   color: #ffa500;
+}
+
+#weather-icon {
+  display: block;
+  margin: 0 auto 0.5rem auto;
 }
