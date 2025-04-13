@@ -77,7 +77,7 @@ function checkFishingConditions(flowStr, tempStr) {
   const flow = parseFloat(flowStr);
   const temp = parseFloat(tempStr);
   const alertEl = document.getElementById("alerts");
-  // Ideal thresholds: flow between 500-2000 cfs and water temperature between 8°C-18°C
+  // Ideal thresholds: flow between 500-2000 cfs and temperature between 8°C-18°C
   if (!isNaN(flow) && !isNaN(temp) && flow >= 500 && flow <= 2000 && temp >= 8 && temp <= 18) {
     alertEl.textContent = "🔥 Conditions are PERFECT for fishing!";
   } else {
@@ -128,13 +128,21 @@ function updateAll() {
   fetchFishingReports();
 }
 
-// Update every 15 minutes for river & weather data
-function startRegularUpdate() {
-  setInterval(() => {
-    const siteCode = document.getElementById("locationSelect").value;
-    fetchRiverData(siteCode);
-  }, 900000);
-}
+// When the drop-down selection changes, update immediately (for USGS/NOAA)
+document.getElementById("locationSelect").addEventListener("change", () => {
+  updateAll();
+});
+
+// Manual UPDATE ALL button (orange) for on-demand refresh of all data
+document.getElementById("update-all").addEventListener("click", () => {
+  updateAll();
+});
+
+// Auto-update river/weather every 15 minutes
+setInterval(() => {
+  const siteCode = document.getElementById("locationSelect").value;
+  fetchRiverData(siteCode);
+}, 900000);
 
 // Schedule a daily update at 8:00 AM (local time)
 function scheduleDailyUpdate() {
@@ -152,17 +160,5 @@ function scheduleDailyUpdate() {
   }, msUntilUpdate);
 }
 
-// Event listener for the UPDATE ALL button
-document.getElementById("update-all").addEventListener("click", () => {
-  updateAll();
-});
-
-// Event listener for location dropdown changes
-document.getElementById("locationSelect").addEventListener("change", () => {
-  updateAll();
-});
-
-// Initial load of all data
 updateAll();
-startRegularUpdate();
 scheduleDailyUpdate();
